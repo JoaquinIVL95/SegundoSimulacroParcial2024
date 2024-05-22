@@ -84,7 +84,8 @@ Class Venta{
         $total = 0;
         $colMotos = $this->getColMotos();
         foreach($colMotos as $moto){
-            if (isset($moto) && is_object($moto) && method_exists($moto, 'getPorcDesc')) { 
+            // if (isset($moto) && is_object($moto) && method_exists($moto, 'getPorcDesc')) { 
+            if($moto instanceof MotoNacional){
                 $porcDesc = $moto->getPorcDesc();
             }
             if(isset($porcDesc)){
@@ -100,13 +101,13 @@ Class Venta{
         $colMotos = $this->getColMotos();
 
         foreach($colMotos as $moto){
-            if(isset($moto) && is_object($moto) && method_exists($moto, 'getImpuesto_imp')){
-                $impuesto = $moto->getImpuesto_imp();
-            }
-            if(isset($impuesto)){
+            if($moto instanceof MotoImportada){
+                // $impuesto = $moto->getImpuesto_imp();
                 $total = $total + $moto->darPrecioVenta();
-
             }
+            // if(isset($impuesto)){
+
+            // }
         }
         return $total;
 
